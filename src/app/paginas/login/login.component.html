@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+</head>
+
+<body>
+    <div class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>Ingreso</h1>
+            </div>
+
+            <div class="login-form">
+                <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder="Correo" id="login-name"
+                        [(ngModel)]="this.email">
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+
+                <div class="control-group">
+                    <input type="password" class="login-field" value="" placeholder="Clave" id="login-pass"
+                        [(ngModel)]="this.pass">
+                    <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+
+                <button class="btnIngresar btn-primary btn-large btn-block" (click)="onLogin()">Ingresar</button>
+                <br>
+                <h3 class="inactive underlineHover" routerLink="/registro/registerPaciente">Registrar Cliente</h3>
+                <h3 class="inactive underlineHover" routerLink="/registro/registerEspecialidad">Registar Especialista
+                </h3>
+                <!--<h3 class="inactive underlineHover" routerLink="/registro/registerAdmin">Registar Admin</h3>-->
+                <br>
+                <br>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-success"
+                        (click)="AccesoRapido('esp')">Especialista</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="AccesoRapido('pac')">Paciente</button>
+                    <button type="button" class="btn btn-outline-secondary"
+                        (click)="AccesoRapido('admin')">Admin</button>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck" style="position: absolute; max-width: 32rem; margin-top: -28%; margin-left: 55%;"
+        *ngIf="seleccioneEspecialista || seleccionePaciente || seleccioneAdmin">
+
+        <!--Especialistas-->
+        <div class="card" *ngIf="seleccioneEspecialista">
+            <img class="card-img-top" style="max-height: 150px;" src={{userEspUno.fotoUno}}>
+
+            <div class="card-body">
+                <h5 class="card-title">{{userEspUno.nombre}} {{userEspUno.apellido}}</h5>
+                <p class="card-text"><small class="text-muted">Edad: {{userEspUno.edad}}</small></p>
+                <p class="card-text"><small class="text-muted">DNI: {{userEspUno.dni}}</small></p>
+                <p class="card-text"><small class="text-muted">Correo: {{userEspUno.mail}}</small></p>
+                <p class="card-text"><button class="btn btn-outline-success btn-block"
+                        (click)="SeleccionarUsuario(userEspUno)">Seleccionar</button></p>
+            </div>
+        </div>
+        <div class="card" *ngIf="seleccioneEspecialista">
+            <img class="card-img-top" style="max-height: 150px;" src={{userEspDos.fotoUno}}>
+            <div class="card-body">
+                <h5 class="card-title">{{userEspDos.nombre}} {{userEspDos.apellido}}</h5>
+                <p class="card-text"><small class="text-muted">Edad: {{userEspDos.edad}}</small></p>
+                <p class="card-text"><small class="text-muted">DNI: {{userEspDos.dni}}</small></p>
+                <p class="card-text"><small class="text-muted">Correo: {{userEspDos.mail}}</small></p>
+                <p class="card-text"><button class="btn btn-outline-success btn-block"
+                        (click)="SeleccionarUsuario(userEspDos)">Seleccionar</button></p>
+            </div>
+        </div>
+        <!--Pacientes-->
+        <div class="card" *ngIf="seleccionePaciente">
+            <!--<img class="card-img-top" style="max-height: 150px;" src={{userPacUno.fotoUno}}>-->
+            <div id="carouselPacienteUno" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="card-img-top d-block w-100" style="max-height: 150px;" src={{userPacUno.fotoUno}}
+                            alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="card-img-top d-block w-100" style="max-height: 150px;" src={{userPacUno.fotoDos}}
+                            alt="Second slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselPacienteUno" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselPacienteUno" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{userPacUno.nombre}} {{userPacUno.apellido}}</h5>
+                <p class="card-text"><small class="text-muted">Edad: {{userPacUno.edad}}</small></p>
+                <p class="card-text"><small class="text-muted">DNI: {{userPacUno.dni}}</small></p>
+                <p class="card-text"><small class="text-muted">Correo: {{userPacUno.mail}}</small></p>
+                <p class="card-text"><button class="btn btn-outline-success btn-block"
+                        (click)="SeleccionarUsuario(userPacUno)">Seleccionar</button></p>
+            </div>
+        </div>
+        <div class="card" *ngIf="seleccionePaciente">
+            <!--<img class="card-img-top" style="max-height: 150px;"  src={{userPacDos.fotoUno}}>-->
+            <div id="carouselPacienteDos" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="card-img-top d-block w-100" style="max-height: 150px;" src={{userPacDos.fotoUno}}
+                            alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="card-img-top d-block w-100" style="max-height: 150px;" src={{userPacDos.fotoDos}}
+                            alt="Second slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselPacienteDos" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselPacienteDos" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{userPacDos.nombre}} {{userPacDos.apellido}}</h5>
+                <p class="card-text"><small class="text-muted">Edad: {{userPacDos.edad}}</small></p>
+                <p class="card-text"><small class="text-muted">DNI: {{userPacDos.dni}}</small></p>
+                <p class="card-text"><small class="text-muted">Correo: {{userPacDos.mail}}</small></p>
+                <p class="card-text"><button class="btn btn-outline-success btn-block"
+                        (click)="SeleccionarUsuario(userPacDos)">Seleccionar</button></p>
+            </div>
+        </div>
+
+        <!--Administrador-->
+        <div class="card" *ngIf="seleccioneAdmin" style="max-width: 15rem;">
+            <img class="card-img-top" src={{userAdmin.fotoUno}}>
+            <div class="card-body">
+                <h5 class="card-title">{{userAdmin.nombre}} {{userAdmin.apellido}}</h5>
+                <p class="card-text"><small class="text-muted">Edad: {{userAdmin.edad}}</small></p>
+                <p class="card-text"><small class="text-muted">DNI: {{userAdmin.dni}}</small></p>
+                <p class="card-text"><small class="text-muted">Correo: {{userAdmin.mail}}</small></p>
+                <p class="card-text"><button class="btn btn-outline-success btn-block"
+                        (click)="SeleccionarUsuario(userAdmin)">Seleccionar</button></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

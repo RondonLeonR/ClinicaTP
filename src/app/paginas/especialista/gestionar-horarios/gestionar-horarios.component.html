@@ -1,0 +1,137 @@
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button *ngIf="horariosEncontrados" class="btn btn-outline-warning my-2 my-sm-0" type="submit"
+                        data-toggle="modal" data-target="#ModalInfo">Horarios Encontrados</button>
+                </li>
+            </ul>
+            <div>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" routerLink="/home">Cancelar</button>
+            </div>
+        </div>
+    </nav>
+    <div class="caja" *ngIf="this.spinner">
+        <div class="caja-screen">
+            <img class="spinner" src="../../../assets/gifCarga.gif">
+        </div>
+    </div>
+    <div class="caja" *ngIf="this.spinner">
+        <div class="caja-screen">
+            <div class="card-group">
+                <div class="card" style="max-width: 350px;">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align: center;">Seleccione Especialidad</h4>
+                        <div class="list-group list-group-flush" *ngFor="let item of listadoEspecialidades">
+                            <button type="button" class="btn btn-secondary list-group-item list-group-item-action"
+                                style="text-align: center;"
+                                (click)="SeleccionaEspecialidad(item.nombre)">{{item.nombre}}</button>
+                        </div>
+                    </div>
+                    <div class="card-footer" *ngIf="especilidadSeleccionada != ''">
+                        <h5 style="text-align: center;">Especialidad seleccionada: {{especilidadSeleccionada}}</h5>
+                    </div>
+                </div>
+                <div class="card">
+                    <br>
+                    <h4 style="text-align: center;">Seleccione Dias</h4>
+                    <div class="btn-group ml-3" role="group">
+                        <label class="btn btn-outline-primary"><input type="checkbox" class="btn-check"
+                                [(ngModel)]='dias.lunes'> Lunes</label>
+                        <label class="btn btn-outline-primary"><input type="checkbox" class="btn-check"
+                                [(ngModel)]='dias.martes'> Martes</label>
+                        <label class="btn btn-outline-primary"><input type="checkbox" class="btn-check"
+                                [(ngModel)]='dias.miercoles'> Miercoles</label>
+                        <label class="btn btn-outline-primary"><input type="checkbox" class="btn-check"
+                                [(ngModel)]='dias.jueves'> Jueves</label>
+                        <label class="btn btn-outline-primary"><input type="checkbox" class="btn-check"
+                                [(ngModel)]='dias.viernes'> Viernes</label>
+                        <label class="btn btn-outline-danger"><input type="checkbox" class="btn-check"
+                                [(ngModel)]='dias.sabado' (change)='CargarSabado()'> Sabado</label>
+                    </div>
+                    <br><br>
+
+                    <div class="ml-4">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <h5 class="mt-2">Seleccione Horario:</h5>
+                            <button type="button" class="btn btn-outline-success" (click)="SeleccionarHorario(1)">8 a
+                                12</button>
+                            <button type="button" class="btn btn-outline-success" (click)="SeleccionarHorario(2)">12 a
+                                16</button>
+                            <button type="button" class="btn btn-outline-success" (click)="SeleccionarHorario(3)">16 a
+                                19</button>
+                        </div>
+                        <br><br>
+                        <div class="btn-group" role="group" aria-label="Basic example" *ngIf="sabadoCargado">
+                            <h5 class="mt-2">Seleccione horario de Sabado: </h5>
+                            <button type="button" class="btn btn-outline-warning" (click)="SeleccionarHorario(4)">8 a
+                                11</button>
+                            <button type="button" class="btn btn-outline-warning" (click)="SeleccionarHorario(5)">11 a
+                                14</button>
+                        </div>
+                        <br>
+                        <br>
+                        <div *ngIf="this.desde!=null">
+                            <p class="font-italic">Horarios seleccionados dias de semana: Desde las {{this.desde}} hasta
+                                las {{this.hasta}}</p>
+                            <p class="font-italic" *ngIf="desdeSabado!=null && sabadoCargado">Horarios seleccionados
+                                para el sabado: Desde
+                                las {{this.desdeSabado}} hasta las {{this.hastaSabado}}</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <button class="btn btn-outline-success btn-block" (click)="AgregarHorario()">Cargar</button>
+        </div>
+    </div>
+
+    <!-- Info -->
+    <div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div *ngIf="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Horarios para
+                            {{this.horarioDeEspecialidadSeleccionada.especialidad}}</h5>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i
+                                class="bi bi-x-circle-fill"></i></button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>Desde: {{this.horarioDeEspecialidadSeleccionada.desde}}</p>
+                        <p>Hasta: {{this.horarioDeEspecialidadSeleccionada.hasta}}</p>
+                        <p>Dias:</p>
+                        <div class="btn-group" role="group" aria-label="Basic example"
+                            *ngIf="this.horarioDeEspecialidadSeleccionada !=false">
+                            <button type="button" class="btn btn-outline-danger"
+                                *ngIf="this.horarioDeEspecialidadSeleccionada.dias.lunes" disabled>Lunes</button>
+                            <button type="button" class="btn btn-outline-danger"
+                                *ngIf="this.horarioDeEspecialidadSeleccionada.dias.martes" disabled>Martes</button>
+                            <button type="button" class="btn btn-outline-danger"
+                                *ngIf="this.horarioDeEspecialidadSeleccionada.dias.miercoles"
+                                disabled>Miercoles</button>
+                            <button type="button" class="btn btn-outline-danger"
+                                *ngIf="this.horarioDeEspecialidadSeleccionada.dias.jueves" disabled>Jueves</button>
+                            <button type="button" class="btn btn-outline-danger"
+                                *ngIf="this.horarioDeEspecialidadSeleccionada.dias.viernes" disabled>Viernes</button>
+                            <button type="button" class="btn btn-outline-success"
+                                *ngIf="this.horarioDeEspecialidadSeleccionada.dias.sabado" disabled>Sabado</button>
+                        </div>
+
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>

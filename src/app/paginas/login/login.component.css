@@ -1,0 +1,123 @@
+*:focus{
+    outline: none;
+}
+
+
+
+body{
+    
+   
+
+    font-family: Arial;
+    
+    padding: 150px;
+    /*
+    background: url('../../../assets/fondo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    background-color: rgb(255, 255, 255);
+    
+    Terminar de ver para que sea responsive
+    
+    4 columnas y 6 col para los cards
+    */
+}
+
+
+.login{
+    margin: 20px auto;
+    width: 400px;
+}
+
+.login-screen{
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.app-title{
+    text-align: center;
+    color: #777;
+}
+
+.login-form {
+    text-align: center;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+input {
+    text-align: center;
+    background-color: #ECF0F1;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 250px;
+    transition: border .5s;
+}
+
+input:focus {
+    border: 2px solid #3498DB;
+    box-shadow: none;
+}
+
+.btnIngresar {
+    border: 2px solid transparent;
+    background: #3cdb34;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 3px;
+    box-shadow: none;
+    transition: 0.25s;
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+}
+  
+.btnIngresar:hover {
+    background-color: #29b93a;
+}
+
+
+
+
+h3.inactive{
+    color: #cccccc;
+}
+
+h3.active {
+    color: #0d0d0d;
+    border-bottom: 2px solid #5fbae9;
+}
+
+
+/*Fade buttons*/
+
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #56baed;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover {
+    color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+    width: 100%;
+}

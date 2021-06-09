@@ -1,0 +1,29 @@
+body{ 
+
+    font-family: Arial;
+    
+    padding: 150px;
+}
+
+.caja{
+    margin: 20px auto;
+    width: 1100px;
+}
+
+.caja-screen{
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+.tablaScroll{
+    height: 300px;
+    overflow-y:scroll;
+    z-index: 100;
+}
+
+
+.spinner{ 
+    width: 350px;
+}

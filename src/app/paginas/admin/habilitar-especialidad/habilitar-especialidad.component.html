@@ -1,0 +1,192 @@
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                </li>
+            </ul>
+            <div>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" routerLink="/home">Cancelar</button>
+            </div>
+        </div>
+    </nav>
+    <div *ngIf="this.spinner">
+        <div class="caja">
+            <div class="caja-screen">
+                <img class="spinner" src="../../../assets/gifCarga.gif">
+            </div>
+        </div>
+    </div>
+    <section *ngIf="!this.spinner">
+
+        <div class="row align-items-start">
+            <div class="col inactive underlineHover" (click)="Listar('pac')" style="text-align: center;">
+                <h3>Pacientes</h3>
+            </div>
+            <div class="col inactive underlineHover" (click)="Listar('esp')" style="text-align: center;">
+                <h3>Especialistas</h3>
+            </div>
+            <div class="col inactive underlineHover" (click)="Listar('adm')" style="text-align: center;">
+                <h3>Administradores</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <!--<h1 style="text-align: center;">Especialistas</h1>-->
+                <!--<p style="text-align: center;">*Toque algún especialista para ver las especialidades que tiene*</p>-->
+                <!--Listado Especialistas-->
+                <table class="table table-ligth" *ngIf="listarEsp" style="text-align: center;">
+                    <tr>
+                        <th class="table-dark">Nombre</th>
+                        <th class="table-dark">Apellido</th>
+                        <th class="table-dark">Edad</th>
+                        <th class="table-dark">DNI</th>
+
+                        <th class="table-dark">Correo</th>
+                        <th class="table-dark">Habilitado</th>
+                        <th class="table-dark">Foto</th>
+                        <th class="table-dark">Habilitar</th>
+                        <!--<th>No Habilitar</th>-->
+                    </tr>
+                    <tr *ngFor="let item of this.listaEspecialistas" (click)="AsignarEspecialista(item)"
+                        data-toggle="modal" data-target="#ModalInfo">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.apellido}}</td>
+                        <td>{{item.edad}}</td>
+                        <td>{{item.dni}}</td>
+
+                        <td>{{item.mail}}</td>
+                        <td *ngIf="!item.habilitado">No</td>
+                        <td *ngIf="item.habilitado">Si</td>
+                        <td><img src="{{item.fotoUno}}" width="50px" height="50px"></td>
+                        <td><button [disabled]="item.habilitado" class="btn btn-outline-success"
+                                (click)="HabilitarCuenta(item)">Habilitar</button></td>
+                        <!--<td><button [disabled]="item.habilitado" class="btn btn-outline-danger" (click)="NoHabilitarCuenta(item)">No Habilitar</button></td>-->
+                    </tr>
+                </table>
+
+                <!--Listado Pacientes-->
+                <table class="table table-ligth" *ngIf="listarPac" style="text-align: center;">
+                    <tr>
+                        <th class="table-dark">Nombre</th>
+                        <th class="table-dark">Apellido</th>
+                        <th class="table-dark">Edad</th>
+                        <th class="table-dark">DNI</th>
+                        <th class="table-dark">Obra Social</th>
+                        <th class="table-dark">Correo</th>
+                        <th class="table-dark">Foto</th>
+                        <th class="table-dark">Foto Secundaria</th>
+                        <th class="table-dark">Historial</th>
+
+                    </tr>
+                    <tr *ngFor="let item of this.listaPacientes" (click)="SeleccionPaciente(item)">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.apellido}}</td>
+                        <td>{{item.edad}}</td>
+                        <td>{{item.dni}}</td>
+                        <td>{{item.obraSocial}}</td>
+                        <td>{{item.mail}}</td>
+
+                        <td><img src="{{item.fotoUno}}" width="50px" height="50px"></td>
+                        <td><img src="{{item.fotoDos}}" width="50px" height="50px"></td>
+                        <td><button class="btn btn-warning" (click)="BuscarEspecialista(item)" data-toggle="modal"
+                                data-target="#ModalHistorial">Historial</button></td>
+                    </tr>
+                </table>
+
+                <!--Listado Pacientes-->
+                <table class="table table-ligth" *ngIf="listarAdm" style="text-align: center;">
+                    <tr>
+                        <th class="table-dark">Nombre</th>
+                        <th class="table-dark">Apellido</th>
+                        <th class="table-dark">Edad</th>
+                        <th class="table-dark">DNI</th>
+                        <th class="table-dark">Correo</th>
+                        <th class="table-dark">Foto</th>
+
+                    </tr>
+                    <tr *ngFor="let item of this.listaAdministradores">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.apellido}}</td>
+                        <td>{{item.edad}}</td>
+                        <td>{{item.dni}}</td>
+                        <td>{{item.mail}}</td>
+                        <td><img src="{{item.fotoUno}}" width="50px" height="50px"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <button class="btn btn-outline-success btn-block" routerLink="/creacionPDF">Lista de Usuarios en PDF</button>
+        <br>
+        <button class="btn btn-outline-primary btn-block" (click)="GenerarExcel()">Lista de Usuarios en Excel</button>
+    </section>
+
+    <!-- Especialidades -->
+    <div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Especialidades de {{espSeleccionado.nombre}}
+                        {{espSeleccionado.apellido}}</h5>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i
+                            class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <div *ngFor="let i of espSeleccionado.especialidad">
+                        <p>*{{i.nombre}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Historial clinico -->
+    <div class="modal fade" id="ModalHistorial" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Historial Clinico</h5>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i
+                            class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-dark" id="PDFGenerar">
+                        <thead>
+                            <tr>
+                                <th>Correo Esp.</th>
+                                <th>Esp.</th>
+                                <th>Altura</th>
+                                <th>Peso</th>
+                                <th>Temp.</th>
+                                <th>Presion</th>
+                                <th colspan="4">Otros Datos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of historialFiltrado">
+
+                                <td>{{item.correoEspecialista}}</td>
+                                <td>{{item.especialidad}}</td>
+                                <td>{{item.altura}}</td>
+                                <td>{{item.peso}}</td>
+                                <td>{{item.temperatura}}</td>
+                                <td>{{item.presion}}</td>
+                                <td *ngFor="let datos of item.datosDinamicos">{{datos.nombre + ' : '+ datos.valor}}
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>

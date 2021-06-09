@@ -1,0 +1,162 @@
+*:focus{
+    outline: none;
+}
+
+
+body{
+    /*
+    background: url('../../../assets/fondo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    background-color: rgb(255, 255, 255);*/
+   
+
+    font-family: Arial;
+    
+    padding: 3px;
+}
+
+
+.login{
+    margin: 100px auto;
+    width: 800px;
+}
+
+.login-screen{
+    background-color: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.app-title{
+    text-align: center;
+    color: #777;
+}
+
+.login-form {
+    text-align: center;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+input {
+    text-align: center;
+    background-color: #ECF0F1;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 300px;
+    transition: border .5s;
+}
+
+input:focus {
+    border: 2px solid #3498DB;
+    box-shadow: none;
+}
+
+.inputEspecialidad{
+    text-align: center;
+    background-color: #ECF0F1;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 200;
+    padding: 10px 0;
+    width: 260px;
+    transition: border .5s;
+}
+
+.cajaEspecialidades{
+    border: 1px solid rgb(179, 63, 63);
+    border-radius: 5px;
+    
+    display: flex;
+    flex: 10%;
+    flex-flow: column;
+    align-items: center;
+    justify-content: top;    
+    height: 250px;
+}
+.itemEsp{
+    font-size: 15px;
+    margin-top: -10px;
+}
+
+.titleEsp{
+    border-bottom: solid 1px red;
+}
+
+
+.btnCrear {
+    border: 2px solid transparent;
+    background: #3cdb34;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0;
+    text-decoration: none;
+    text-shadow: none;
+    border-radius: 3px;
+    box-shadow: none;
+    transition: 0.25s;
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+}
+  
+.btnCrear:hover {
+    background-color: #29b93a;
+}
+
+.spinner{
+    margin-left: 37%;
+    margin-top: 20%;
+    max-width: 400px;
+}
+
+
+
+h4.inactive{
+    color: #cccccc;
+}
+
+h4.active {
+    color: #0d0d0d;
+    border-bottom: 2px solid #5fbae9;
+}
+
+
+/*Fade buttons*/
+
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #56baed;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover {
+    color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+    width: 100%;
+}
+
+
+.btn{
+    cursor: pointer;
+    font-size: 1em;
+    
+}

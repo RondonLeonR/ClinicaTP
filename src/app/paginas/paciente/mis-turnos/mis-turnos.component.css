@@ -1,0 +1,42 @@
+body{
+    /*background: url('../../../../assets/fondo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size:cover;*/
+    
+   
+
+    font-family: Arial;
+    
+    padding: 150px;
+}
+
+.caja{
+    margin: 20px auto;
+    width: 1000px;
+}
+
+.caja-screen{
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+.tablaScroll{
+    height: 300px;
+    overflow-y:scroll;
+    z-index: 100;
+}
+
+
+.tablaScroll::-webkit-scrollbar{
+    width: 7px;
+    background: #000;
+}
+
+.tablaScroll::-webkit-scrollbar-thumb{
+    background: #3eff4f;
+    border-radius: 4px;
+}

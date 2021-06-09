@@ -1,0 +1,33 @@
+body{
+    background: url('../../../assets/fondo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    background-color: rgb(255, 255, 255);
+   
+
+    font-family: Arial;
+    
+    padding: 150px;
+}
+
+.caja{
+    margin: 20px auto;
+    width: 400px;
+}
+
+.caja-screen{
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.app-title{
+    text-align: center;
+    color: #777;
+}
+
+.spinner{ 
+    width: 350px;
+}

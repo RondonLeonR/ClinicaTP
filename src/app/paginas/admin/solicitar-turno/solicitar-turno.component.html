@@ -1,0 +1,220 @@
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                </li>
+            </ul>
+            <div>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" routerLink="/home">Cancelar</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row align-items-start">
+        <div class="col inactive underlineHover" (click)="CambiarVista('solicitar')" style="text-align: center;">
+            <h3>Solicitar Turno</h3>
+        </div>
+        <div class="col inactive underlineHover" (click)="CambiarVista('misTurnos')" style="text-align: center;">
+            <h3>Turnos</h3>
+        </div>
+    </div>
+    <div class="card-group" *ngIf="this.solicitarTurno">
+        <div class="card text-center text-white bg-dark" style="width: 25rem;">
+            <!--Eligiendo Especialista-->
+            <div class="card-body" *ngIf="this.seleccioneEspecialidad">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Especialidad</h6>
+                <div class="tablaScroll" #scrollframe>
+
+                    <table class="table table-striped table-dark ">
+                        <thead>
+                            <tr>
+                                <th>Especialidad</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of especialidades">
+                            <tr (click)="EspecialidadSeleccionada(item)">
+                                <td>{{item}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--Eligiendo Especialidad-->
+            <div class="card-body" *ngIf="this.seleccioneEspecialista">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Especialista</h6>
+                <div class="tablaScroll" #scrollframe>
+                    <table class="table table-striped table-dark ">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Foto</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of this.profesionalEspecialidad">
+                            <tr (click)="EspecialistaSeleccionado(item)">
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.apellido}}</td>
+                                <td><img src="{{item.fotoUno}}" style="max-width: 50px;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--Eligiendo Turnos-->
+            <div class="card-body" *ngIf="this.seleccioneTurno  && this.listaHorariosDelEspecialista != false">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Turno</h6>
+                <div class="tablaScroll" #scrollframe>
+                    <!--<div class="list-group list-group-flush" *ngFor="let item of this.turnosMostrar"
+                        (click)="SeleccionTurno(item)">
+                        <button type="button" class="list-group-item">{{item.dia}} {{item.hora}}</button>
+                    </div>-->
+
+                    <table class="table table-striped table-dark ">
+                        <thead>
+                            <tr>
+                                <th>Dia</th>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of this.turnosMostrar">
+                            <tr (click)="SeleccionTurno(item)">
+                                <td>{{item.dia}}</td>
+                                <td>{{item.hora}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!--Eligiendo Paciente-->
+            <div class="card-body" *ngIf="this.seleccionePaciente">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Paciente</h6>
+                <div class="tablaScroll" #scrollframe>
+
+                    <table class="table table-striped table-dark ">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>DNI</th>
+                                <th>Foto</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of this.listadoPacientes">
+                            <tr *ngIf="item.categoria == 'Paciente'" (click)="PedirTurno(item)">
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.apellido}}</td>
+                                <td>{{item.dni}}</td>
+                                <td><img src={{item.fotoUno}} style="max-width: 50px;"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="card-body" *ngIf="this.seleccioneTurno && this.listaHorariosDelEspecialista == false">
+
+                <h6 class="card-text mb-2">No se encontraron turnos</h6>
+
+            </div>
+
+            <div class="card-footer text-muted" *ngIf="!this.seleccioneEspecialidad">
+                <button class="btn btn-outline-danger" (click)="CancelarTurno()">Cancelar</button>
+            </div>
+        </div>
+        <div class="card text-center text-white bg-dark" style="width: 30rem;">
+            <div class="card-body" *ngIf="!seleccioneEspecialidad">
+                <h3 class="card-title">Datos Cargados</h3>
+                <p class="card-text">Especialidad Seleccionada: {{this.especialidadSeleccionada}}</p>
+                <p class="card-text" *ngIf="especialistaSeleccionado != null ">Especialista Seleccionado:
+                    {{this.especialistaSeleccionado.apellido}},{{this.especialistaSeleccionado.nombre}}</p>
+                <p class="card-text" *ngIf="this.seleccionePaciente">Horario Seleccionada: {{this.turnoCreado.hora}}</p>
+                <p class="card-text" *ngIf="this.seleccionePaciente">Fecha Seleccionada: {{this.turnoCreado.fecha}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-group" *ngIf="this.verMisTurnos">
+        <div class="card text-center text-white bg-dark" style="width: 30rem;">
+            <div class="card-body ">
+                <h3 class="card-title">Mis Turnos</h3>
+                <div class="tablaScroll" style="height: 500px;">
+                    <table class="table table-striped" style="color: black;">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Especialidad</th>
+                                <th>Especialista</th>
+                                <th>Hora</th>
+                                <th>Dia</th>
+                                <th>Estado</th>
+                                <th colspan="4">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let item of listaTurnos">
+                            <tr appEstados [estado]="item.estado">
+                                <td>{{item.apellidoPaciente}},{{item.nombrePaciente}}</td>
+                                <td>{{item.especialidad}}</td>
+                                <td>{{item.especialista}}</td>
+                                <td>{{item.hora}}</td>
+                                <td>{{item.fecha}}</td>
+                                <!--Badge-->
+                                <td *ngIf="item.estado == 'Pendiente'"><span
+                                        class="badge badge-warning">Pendiente</span></td>
+                                <td *ngIf="item.estado == 'Cancelado'"><span class="badge badge-danger">Cancelado</span>
+                                </td>
+                                <td *ngIf="item.estado == 'Realizado'"><span
+                                        class="badge badge-primary">Realizado</span></td>
+                                <td *ngIf="item.estado == 'Aceptado'"><span class="badge badge-success">Aceptado</span>
+                                </td>
+                                <td *ngIf="item.estado == 'Rechazado'"><span class="badge badge-danger">Rechazado</span>
+                                </td>
+                                <!--Botones-->
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                       [disabled]="item.estado != 'Pendiente'" data-target="#ModalCancelacion" (click)="SeterTurno(item)">Cancelar</button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingresar Motivo de cancelacion -->
+    <div class="modal fade" id="ModalCancelacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div *ngIf="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Por favor ingrese el motivo por el cual cancela el turno.</h5>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <input [(ngModel)]="motivoCancelacion">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-danger" data-dismiss="modal"
+                            (click)="CancelarTurnoConMotivo()">Confirmar</button>
+                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

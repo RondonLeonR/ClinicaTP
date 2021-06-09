@@ -1,0 +1,83 @@
+<body>
+    <div class="card-group">
+        <div class="card text-center text-white bg-dark">
+            <!--Eligiendo Especialista    *ngIf="this.seleccioneEspecialidad"-->
+            <div class="card-body">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Especialidad</h6>
+                <div class="tablaScroll" #scrollframe>
+                    <div class="list-group list-group-flush" *ngFor="let item of especialidades ">
+
+                        <button type="button" class="btn btn-secondary list-group-item list-group-item-action"
+                            (click)="EspecialidadSeleccionada(item.nombre)">{{item.nombre}}
+                            <img src="{{item.foto}}" style="max-width: 50px; text-align: end;"></button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card text-center text-white bg-dark">
+            <!--Eligiendo Especialidad    *ngIf="this.seleccioneEspecialista"-->
+            <div class="card-body">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Especialista</h6>
+                <div class="tablaScroll" #scrollframe>
+                    <div class="list-group list-group-flush bg-dark" *ngFor="let item of this.profesionalEspecialidad">
+                        <button type="button" class="list-group-item list-group-item-action"
+                            (click)="EspecialistaSeleccionado(item)">
+                            {{item.apellido}},{{item.nombre}}
+                            <img src="{{item.fotoUno}}" style="max-width: 50px; text-align: end;">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center text-white bg-dark">
+            <!--Eligiendo Turnos   *ngIf="this.seleccioneTurno && this.listaHorariosDelEspecialista != false"-->
+            <div class="card-body" *ngIf="this.listaHorariosDelEspecialista != false">
+
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Turno</h6>
+                <div class="btn-group btn-group-sm" role="group" *ngIf="this.listaHorariosDelEspecialista != false">
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Lunes'">Lunes</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Martes'">Martes</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Miercoles'">Miercoles</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Jueves'">Jueves</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Viernes'">Viernes</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Sabado'">Sabado</button>
+                </div>
+                <div class="tablaScroll" #scrollframe>
+                    <div class="list-group list-group-flush" *ngFor="let item of this.turnosMostrar | filtro:itemPipe"
+                        (click)="PedirTurno(item)">
+                        <button type="button" class="list-group-item">{{item.dia}} {{item.hora}}</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body" *ngIf="this.listaHorariosDelEspecialista == false">
+                <h6 class="card-subtitle mb-2 text-muted">Eliga Turno</h6>
+                <h6 class="card-text" style="width: auto;">No se encontraron turnos</h6>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body text-center bg-dark">
+                <h6 class="card-title" style="color: white;">Turno Rapido</h6>
+                <!--Agregar Turno mas cercana de la especialidad seleccionada-->
+                <button *ngIf="this.turnoRapido!=null" type="button"
+                    class="btn btn-success btn-block" (click)="PedirTurnoRapido(this.turnoRapido)">{{this.turnoRapido.dia}} {{this.turnoRapido.hora}}</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>

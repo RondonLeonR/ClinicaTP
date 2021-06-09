@@ -1,0 +1,27 @@
+<body>
+
+
+    <div class="card" *ngIf="user$ | async as user; else loading">
+        <div class="card-body">
+            <h3 class="card-title text-center">Verificacion de Correo!</h3>
+            <div class="form-group ">
+                <p class="text-center mt-5">
+                    Para continuar se necesita la confirmacion del correo <strong>{{user?.email}}</strong>
+                </p>
+                <p class="text-center">
+                    Por favor revisa la bandeja de entrada de tu correo y verifica tu correo ingresado.
+                </p>
+            </div>
+            <div class="form-group text-center">
+                <button class="btn btn-warning" (click)="EnviarCorreo()">Reenviar correo de verificacion</button>
+                <br>
+                <button class="btn btn-success mt-2"  routerLink="/login">Ingresar</button>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #loading>
+        Cargando....
+    </ng-template>
+
+</body>

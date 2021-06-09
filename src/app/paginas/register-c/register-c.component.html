@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <div *ngIf="this.spinner">
+        <div class="login">
+            <div class="login-screen">
+                <img class="spinner" src="../../../assets/gifCarga.gif">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!this.spinner" class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>Registrar Paciente</h1>
+            </div>
+
+            <div class="login-form">
+                <form [formGroup]="forma">
+
+                    <!--Nombre-->
+                    <div class="control-group">
+                        <input type="text" class="login-field" placeholder="Nombre" id="login-nombre"
+                            formControlName="nombre">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.nombre.errors?.required && forma.controls.nombre.touched">El nombre es
+                            requerido</small>
+
+                    </div>
+                    <!--Apellido-->
+                    <div class="control-group">
+                        <input type="text" class="login-field" value="" placeholder="Apellido" id="login-apellido"
+                            formControlName="apellido">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.apellido.errors?.required && forma.controls.apellido.touched">El
+                            apellido es requerido</small>
+                    </div>
+                    <!--Edad-->
+                    <div class="control-group">
+                        <input type="number" class="login-field" value="" placeholder="Edad" id="login-edad"
+                            formControlName="edad">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.edad.errors?.required && forma.controls.edad.touched">La edad es
+                            requerida</small>
+                    </div>
+
+                    <!--DNI-->
+                    <div class="control-group">
+                        <input type="number" class="login-field" value="" placeholder="DNI" id="login-dni"
+                            formControlName="dni">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.dni.errors?.required && forma.controls.dni.touched">El dni es
+                            requerido</small>
+                    </div>
+
+                    <!--Obra Social-->
+                    <div class="control-group">
+                        <input type="text" class="login-field" value="" placeholder="Obra Social" id="login-obraS"
+                            formControlName="obraSocial">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.obraSocial.errors?.required && forma.controls.obraSocial.touched">La
+                            obra social es requerida</small>
+                    </div>
+                    <!--Correo-->
+                    <div class="control-group">
+                        <input type="text" class="login-field" value="" placeholder="Correo" id="login-correo"
+                            formControlName="correo">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.correo.errors?.required && forma.controls.correo.touched">El correo es
+                            requerido</small>
+                        <small class="invalid" *ngIf="forma.controls.correo.errors?.pattern">El correo es
+                            invalido</small>
+                    </div>
+                    <!--Clave-->
+                    <div class="control-group">
+                        <input type="password" class="login-field" value="" placeholder="Clave" id="login-pass"
+                            formControlName="clave">
+                        <br>
+                        <small class="invalid"
+                            *ngIf="forma.controls.clave.errors?.required && forma.controls.clave.touched">La clave es
+                            requerida</small>
+                    </div>
+                    <!--Fotos-->
+                    <div class="control-group">
+                        <input type="file" accept=".png, .jpg" class="login-field" id="login-foto"
+                            (change)="agregarFoto($event)">
+                        <input type="file" accept=".png, .jpg" class="login-field" id="login-foto2"
+                            (change)="agregarFotoDos($event)">
+                    </div>
+
+                    <div class="control-group" style="margin-left: 30px;">
+                        <ngx-recaptcha2  #captchaElem [siteKey]="siteKey" formControlName="recaptcha"></ngx-recaptcha2>
+                    </div>
+                   
+                    <button class="btn btn-large btn-block" [disabled]="forma.invalid"
+                        (click)="crearPaciente()">Crear</button>
+                    <br>
+                    <h4 class="inactive underlineHover" routerLink="/login">Ya tengo una cuenta</h4>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

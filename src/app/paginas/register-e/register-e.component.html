@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <div *ngIf="this.spinner">
+        <img class="spinner" src="../../../assets/gifCarga.gif">
+    </div>
+    <div class="login" *ngIf="!this.spinner">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>Registrar Especialista</h1>
+            </div>
+
+            <div class="login-form">
+                <form [formGroup]="forma">
+                    <div class="row">
+                        <!--Nombre-->
+                        <div class="col">
+                            <div class="control-group">
+                                <input type="text" class="login-field" value="" placeholder="Nombre" id="login-nombre"
+                                    formControlName="nombre">
+                                <br>
+                                <small class="invalid"
+                                    *ngIf="forma.controls.nombre.errors?.required && forma.controls.nombre.touched">El
+                                    nombre es
+                                    requerido</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!--Apellido-->
+                            <input type="text" class="login-field" value="" placeholder="Apellido" id="login-apellido"
+                                formControlName="apellido">
+                            <br>
+                            <small class="invalid"
+                                *ngIf="forma.controls.apellido.errors?.required && forma.controls.apellido.touched">El
+                                apellido es requerido</small>
+                        </div>
+                        <!--Edad-->
+                        <div class="col">
+                            <div class="control-group">
+                                <input type="number" class="login-field" value="" placeholder="Edad" id="login-edad"
+                                    formControlName="edad">
+                                <br>
+                                <small class="invalid"
+                                    *ngIf="forma.controls.edad.errors?.required && forma.controls.edad.touched">La edad
+                                    es
+                                    requerida</small>
+                            </div>
+                        </div>
+                        <!--DNI-->
+                        <div class="col">
+                            <input type="number" class="login-field" value="" placeholder="DNI" id="login-dni"
+                                formControlName="dni">
+                            <br>
+                            <small class="invalid"
+                                *ngIf="forma.controls.dni.errors?.required && forma.controls.dni.touched">El dni es
+                                requerido</small>
+
+
+                        </div>
+                        <!--Correo-->
+                        <div class="col">
+                            <div class="control-group">
+                                <input type="text" class="login-field" value="" placeholder="Correo" id="login-correo"
+                                    formControlName="correo">
+                                <br>
+                                <small class="invalid"
+                                    *ngIf="forma.controls.correo.errors?.required && forma.controls.correo.touched">El
+                                    correo es requerido</small>
+                                <small class="invalid" *ngIf="forma.controls.correo.errors?.pattern">El correo es
+                                    invalido</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!--Clave-->
+                            <input type="password" class="login-field" value="" placeholder="Clave" id="login-pass"
+                                formControlName="clave">
+                            <br>
+                            <small class="invalid"
+                                *ngIf="forma.controls.clave.errors?.required && forma.controls.clave.touched">La clave
+                                es requerida</small>
+                        </div>
+
+                        <!--Especialidad-->
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="inputEspecialidad login-field" value="" placeholder="Especialidad"
+                                id="login-especialidad" formControlName="especialidad">
+                            <button class="btn btn-outline-success ml-1" style="font-size: 21px;"
+                                (click)="AgregarEspecialidadManualmente()">+</button>
+
+                        </div>
+
+                        <div class="col">
+                            <!--Fotos-->
+                            <div class="control-group">
+                                <input type="file" class="login-field" value="" placeholder="Foto" accept=".png, .jpg"
+                                    (change)="agregarFoto($event)" formControlName="foto">
+                                <br>
+                                <small class="invalid"
+                                    *ngIf="forma.controls.foto.errors?.required && forma.controls.foto.touched">La foto
+                                    es requerida</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="cajaEspecialidades">
+                                <p class="titleEsp">Seleccione especialidades: </p>
+                                <div *ngFor="let item of especialidadesTraidas | async">
+                                    <span *ngIf="item.agregada" class="itemEsp">{{item.nombre}}</span>
+                                    <button type="button" class="btn btn-outline-success ml-5 mt-1 btn-sm"
+                                        (click)="agregarEspecialidad(item)" small>
+                                        <i class="bi bi-plus-square-fill"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="cajaEspecialidades">
+                                <p class="titleEsp">Especialidades agregadas: </p>
+                                <div *ngFor="let item of especialidadesAgregadas ; let l = count">
+                                    <span class="itemEsp">{{item.nombre}} </span>
+                                    <button class="btn btn-outline-danger btn-sm mt-1 ml-5"
+                                        (click)="eliminarEspecialidad(item)"><i class="bi bi-trash-fill"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" style="margin-left: 30%;">
+                        <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" formControlName="recaptcha"></ngx-recaptcha2>
+                    </div>
+                    <br>
+                    <button class="btnCrear btn-primary btn-large btn-block"
+                        (click)="crearEspecialista()">Crear</button>
+                    <br>
+                    <h4 class="inactive underlineHover" routerLink="/login">Ya tengo una cuenta</h4>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

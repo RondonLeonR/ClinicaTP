@@ -1,0 +1,58 @@
+body{
+    background: url('../../../../assets/fondo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    
+   
+
+    font-family: Arial;
+    
+    padding: 150px;
+}
+
+h3.inactive{
+    color: #ccc;
+}
+
+h3.active {
+    color: #0d0d0d;
+    border-bottom: 2px solid #ea0e0e;
+}
+
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #ea0e0e;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover {
+    color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+    width: 100%;
+}
+
+.tablaScroll{
+    height: 300px;
+    overflow-y:scroll;
+    z-index: 100;
+}
+
+
+.tablaScroll::-webkit-scrollbar{
+    width: 7px;
+    background: #000;
+}
+
+.tablaScroll::-webkit-scrollbar-thumb{
+    background: #3eff4f;
+    border-radius: 4px;
+}

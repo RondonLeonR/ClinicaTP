@@ -1,0 +1,54 @@
+body{
+
+    font-family: Arial;
+    
+    padding: 150px;
+}
+
+
+.caja{
+    margin: 20px auto;
+    width: 400px;
+}
+
+.caja-screen{
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.spinner{ 
+    width: 350px;
+}
+
+
+h3.inactive{
+    color: #cccccc;
+}
+
+h3.active {
+    color: #0d0d0d;
+    border-bottom: 2px solid #5fbae9;
+}
+
+
+/*Fade buttons*/
+
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #56baed;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover {
+    color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+    width: 100%;
+}
