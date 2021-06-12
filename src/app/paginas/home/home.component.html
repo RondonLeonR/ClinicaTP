@@ -1,6 +1,6 @@
 <body>
     <div *ngIf="this.spinner">
-        <div class="caja">
+        <div class="caja" style="margin-top: 20%;">
             <div class="caja-screen">
                 <img class="spinner" src="../../../assets/gifCarga.gif">
             </div>
@@ -8,29 +8,66 @@
     </div>
     <div *ngIf="!this.spinner">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <button *ngIf="this.usuarioIngresado.categoria != 'Paciente'" class="btn btn-outline-warning my-2 my-sm-0" type="submit" data-toggle="modal"
+                        <button *ngIf="this.usuarioIngresado.categoria != 'Paciente'"
+                            class="btn btn-outline-warning my-2 my-sm-0" type="submit" data-toggle="modal"
                             data-target="#ModalInfo">Info</button>
                     </li>
                     <li>
-                        <button *ngIf="this.usuarioIngresado.categoria == 'Paciente'" class="btn btn-outline-success my-2 my-sm-0 ml-3" routerLink="/paciente/misTurnos">Mis Turnos</button>
+                        <button *ngIf="this.usuarioIngresado.categoria == 'Paciente'"
+                            class="btn btn-outline-success my-2 my-sm-0 ml-3" routerLink="/paciente/misTurnos">Mis
+                            Turnos</button>
                     </li>
                     <li>
-                        <button *ngIf="this.usuarioIngresado.categoria == 'Paciente'" class="btn btn-outline-success my-2 my-sm-0 ml-3" routerLink="/paciente/miPerfil">Mi Perfil</button>
+                        <button *ngIf="this.usuarioIngresado.categoria == 'Paciente'"
+                            class="btn btn-outline-success my-2 my-sm-0 ml-3" routerLink="/paciente/miPerfil">Mi
+                            Perfil</button>
                     </li>
                 </ul>
-                <div>
+                <form>
                     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="CerrarSesion()">Cerrar
                         Sesion</button>
-                </div>
+                </form>
+                <!--los 'a' eran botones-->
             </div>
         </nav>
 
+        <!--
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+        -->
 
         <!-- Especialista -->
-        <div *ngIf="this.usuarioIngresado.categoria == 'Especialista'" class="caja">
+        <div *ngIf="this.usuarioIngresado.categoria == 'Especialista'" class="caja" style="margin-top: 20%;">
             <div class="caja-screen">
                 <div *ngIf="!this.usuarioIngresado.habilitado && this.usuarioIngresado.categoria == 'Especialista'"
                     class="app-title">
@@ -42,12 +79,17 @@
                         routerLink="/especialista/gestionarHorarios">Gestionar Horarios</button>
                     <button class="btn btn-outline-primary btn-block btn-lg"
                         routerLink="/especialista/gestionarTurnos">Ver Turnos</button>
-                    <button class="btn btn-outline-primary btn-block">Pacientes</button>
+                    <button class="btn btn-outline-primary btn-block btn-lg"
+                        routerLink="/especialista/seccionPacientes">Historial de Pacientes</button>
+                    <button class="btn btn-outline-danger btn-block btn-lg"
+                        routerLink="/especialista/graficoBarras">Grafico de Turnos por Dia</button>
+                    <button class="btn btn-outline-danger btn-block btn-lg"
+                        routerLink="/especialista/graficoPieOperacionesEsp">Operaciones por Especialidad</button>
                 </div>
             </div>
         </div>
         <!-- Admin -->
-        <div *ngIf="this.usuarioIngresado.categoria == 'Admin'" class="caja">
+        <div *ngIf="this.usuarioIngresado.categoria == 'Admin'" class="caja" style="margin-top: 20%;">
             <div class="caja-screen">
                 <button class="btn btn-outline-primary btn-block btn-lg"
                     routerLink="/admin/habilitarEspecialista">Seccion Usuarios</button>
@@ -62,7 +104,6 @@
         <!-- Paciente -->
         <div *ngIf="this.usuarioIngresado.categoria == 'Paciente'">
             <app-home-paciente></app-home-paciente>
-
         </div>
     </div>
 

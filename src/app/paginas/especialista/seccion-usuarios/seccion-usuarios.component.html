@@ -1,0 +1,100 @@
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+
+                </li>
+            </ul>
+            <div>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" routerLink="/home">Volver</button>
+            </div>
+        </div>
+    </nav>
+    <div class="card-group">
+        <div class="card text-center text-white bg-dark" style="width: 25rem;" *ngIf="mostrarEspecialidades">
+            <div class="card-body">
+                <h4 class="card-subtitle mb-2">Eliga Especialidad</h4>
+                <div class="tablaScroll" #scrollframe>
+                    <div class="list-group list-group-flush" *ngFor="let item of listadoEspecialidades">
+                        <button type="button" class="btn btn-secondary list-group-item list-group-item-action"
+                            (click)="ElegirEspecialidad(item.nombre)">{{item.nombre}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card text-center text-white bg-dark" style="width: 25rem;" *ngIf="mostrarHistoriales">
+            <div class="card-header">
+                <i class="bi bi-arrow-left-square" (click)="this.SeleccionarOtraEspecialidad()"></i>Historial Clinico
+            </div>
+            <div class="card-body">
+                <table class="table table-dark" id="PDFGenerar">
+                    <thead>
+                        <tr>
+                            <th>Correo Pac.</th>
+                            <th>Esp.</th>
+                            <th>Altura</th>
+                            <th>Peso</th>
+                            <th>Temp.</th>
+                            <th>Presion</th>
+                            <!--<th colspan="4">Otros Datos</th>-->
+                            <th>Otros</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor='let item of this.historialesEncontrados'>
+                        <tr *ngIf="item.especialidad == this.especialidadSeleccionada">
+                            <td>{{item.correoPaciente}}</td>
+                            <td>{{item.especialidad}}</td>
+                            <td>{{item.altura}}</td>
+                            <td>{{item.peso}}</td>
+                            <td>{{item.temperatura}}</td>
+                            <td>{{item.presion}}</td>
+                            <!--<td *ngFor="let datos of item.datosDinamicos">{{datos.nombre + ' : '+ datos.valor}}</td>-->
+                            <td data-toggle="modal" data-target="#ModalMasInfo" (click)="SetearHistorial(item)"><button class="btn btn-outline-warning">Mas Info</button> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mas info del historial -->
+    <div class="modal fade" id="ModalMasInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div *ngIf="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Diagnostico dejado por usted..</h5>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p>{{auxHistorial.diagnostico}}</p>
+                        <br>
+
+                        <p style="text-align: center;">Otros Datos</p>
+                        <table class="table table-ligth">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Valor</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let datos of auxHistorial.datosDinamicos">
+                                    <td>{{datos.nombre}}</td>
+                                    <td>{{datos.valor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

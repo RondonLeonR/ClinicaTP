@@ -34,4 +34,8 @@ export class HistoriaClinicaService {
   public BuscarHistoriaCorreo(correo){
     return this.bd.collection(this.rutaDeLaColeccion, ref=>ref.where("correoPaciente","==",correo));
   }
+
+  public BuscarHistoriaCorreoEsp(correo){
+    return this.bd.collection(this.rutaDeLaColeccion, ref=>ref.where("correoEspecialista","==",correo));
+  }
 }

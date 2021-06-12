@@ -1,0 +1,12 @@
+<!-- horizontal -->
+
+<div class="flip" *ngFor="let item of listaMostrarEspecialistas" (click)="EspecialistaElegido(item)">
+    <div class="front" style="background-image: url({{item.fotoUno}})">
+       <!--<h6 class="text-shadow" style="text-align: center;"></h6>-->
+    </div>
+    <div class="back" >
+       <p style="text-align: center;">{{item.nombre | letra:item.nombre}}</p>
+       <p style="text-align: center;">{{item.apellido | letra:item.apellido}}</p>
+    </div>
+ </div>
+ 

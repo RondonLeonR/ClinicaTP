@@ -1,5 +1,9 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -127,10 +131,17 @@
                         <p>{{this.auxTurno.hora}} {{this.auxTurno.fecha}}</p>
 
                         <!--Agregar info del diagnostico-->
+                        <div *ngIf="this.auxTurno.calificacion != null">
+                            <h5>Atencion dejada por el Paciente:</h5>
+                            <p>Calificacion: {{this.auxTurno.calificacion}}</p>
+                            <p>Comentario: {{this.auxTurno.comentarioAtencion}}</p>
+                            <p>Algo para mejorar: {{this.auxTurno.comentarioEncuesta}}</p>
+
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-toggle="modal" data-target="#ModalAtencion" class="btn btn-primary"
-                            *ngIf="this.auxTurno.estado == 'Realizado' && this.auxTurno.comentarioAtencion != null">Calificar
+                            *ngIf="this.auxTurno.estado == 'Realizado' && this.auxTurno.comentarioAtencion == null" data-dismiss="modal">Calificar
                             Atencion</button>
                         <button class="btn btn-success" data-dismiss="modal">OK</button>
                     </div>
@@ -197,7 +208,8 @@
                         [(ngModel)]="comentarioEncuesta"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline-primary" data-dismiss="modal" (click)="GuardarAtencion()">Ok</button>
+                    <button class="btn btn-outline-primary" data-dismiss="modal" (click)="GuardarAtencion()">Guardar</button>
+                    <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
 

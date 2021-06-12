@@ -1,11 +1,54 @@
-<body>
-    <div class="card-group">
-        <div class="card text-center text-white bg-dark">
-            <!--Eligiendo Especialista    *ngIf="this.seleccioneEspecialidad"-->
+    <div class="container" style="margin-top: 10%;">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4" style="text-align: center;">
+                <h2>Eliga Especialidad</h2>
+                <app-botones-solicitar-turno [listaMostrarEspecialidades]="this.especialidades"
+                    (especialidadSeleccionada)="EspecialidadSeleccionada($event)">
+                </app-botones-solicitar-turno>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                <h2>Eliga Especialista</h2>
+                <app-botones-mostrar-especialistas [listaMostrarEspecialistas]="this.profesionalEspecialidad"
+                    (especialistaSeleccionado)="EspecialistaSeleccionado($event)">
+                </app-botones-mostrar-especialistas>
+            </div>
+            <div class="col-md-4" style="text-align: center;">
+                <h2>Eliga Turno</h2>
+                <div *ngIf="this.listaHorariosDelEspecialista != false">
+
+                    <div class="btn-group btn-group-sm" role="group" *ngIf="this.listaHorariosDelEspecialista != false">
+                        <button type="button" class="btn btn-secondary" (click)="itemPipe='Lunes'">L</button>
+                        <button type="button" class="btn btn-secondary" (click)="itemPipe='Martes'">M</button>
+                        <button type="button" class="btn btn-secondary" (click)="itemPipe='Miercoles'">Mi</button>
+                        <button type="button" class="btn btn-secondary" (click)="itemPipe='Jueves'">J</button>
+                        <button type="button" class="btn btn-secondary" (click)="itemPipe='Viernes'">V</button>
+                        <button type="button" class="btn btn-secondary" (click)="itemPipe='Sabado'">S</button>
+                    </div>
+                    <div class="tablaScroll" #scrollframe>
+                        <div class="list-group list-group-flush"
+                            *ngFor="let item of this.turnosMostrar | filtro:itemPipe" (click)="PedirTurno(item)">
+                            <button appMouseSobreBoton type="button" class="list-group-item" style="border: 1px solid #999999;">{{item.dia}} {{item.hora}}</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="this.listaHorariosDelEspecialista == false">
+                    <h6 class="card-text" style="text-align: center;">No se encontraron turnos</h6>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="card-group">
+        <div class="card text-center text-white bg-dark" style="max-width: 30%;">
+            <!--Eligiendo Especialista    *ngIf="this.seleccioneEspecialidad"
             <div class="card-body">
 
                 <h6 class="card-subtitle mb-2 text-muted">Eliga Especialidad</h6>
-                <div class="tablaScroll" #scrollframe>
+                <!--<div class="tablaScroll" #scrollframe>
                     <div class="list-group list-group-flush" *ngFor="let item of especialidades ">
 
                         <button type="button" class="btn btn-secondary list-group-item list-group-item-action"
@@ -14,15 +57,18 @@
 
                     </div>
                 </div>
+                <app-botones-solicitar-turno [listaMostrarEspecialidades]="this.especialidades"
+                    (especialidadSeleccionada)="EspecialidadSeleccionada($event)">
+                </app-botones-solicitar-turno>
 
             </div>
         </div>
-        <div class="card text-center text-white bg-dark">
-            <!--Eligiendo Especialidad    *ngIf="this.seleccioneEspecialista"-->
+        <div class="card text-center text-white bg-dark" style="max-width: 30%;">
+            <!--Eligiendo Especialidad    *ngIf="this.seleccioneEspecialista"
             <div class="card-body">
 
                 <h6 class="card-subtitle mb-2 text-muted">Eliga Especialista</h6>
-                <div class="tablaScroll" #scrollframe>
+                <!--<div class="tablaScroll" #scrollframe>
                     <div class="list-group list-group-flush bg-dark" *ngFor="let item of this.profesionalEspecialidad">
                         <button type="button" class="list-group-item list-group-item-action"
                             (click)="EspecialistaSeleccionado(item)">
@@ -31,20 +77,24 @@
                         </button>
                     </div>
                 </div>
+
+                <app-botones-mostrar-especialistas [listaMostrarEspecialistas]="this.profesionalEspecialidad"
+                    (especialistaSeleccionado)="EspecialistaSeleccionado($event)">
+                </app-botones-mostrar-especialistas>
             </div>
         </div>
         <div class="card text-center text-white bg-dark">
-            <!--Eligiendo Turnos   *ngIf="this.seleccioneTurno && this.listaHorariosDelEspecialista != false"-->
+            <!--Eligiendo Turnos   *ngIf="this.seleccioneTurno && this.listaHorariosDelEspecialista != false"
             <div class="card-body" *ngIf="this.listaHorariosDelEspecialista != false">
 
                 <h6 class="card-subtitle mb-2 text-muted">Eliga Turno</h6>
                 <div class="btn-group btn-group-sm" role="group" *ngIf="this.listaHorariosDelEspecialista != false">
-                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Lunes'">Lunes</button>
-                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Martes'">Martes</button>
-                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Miercoles'">Miercoles</button>
-                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Jueves'">Jueves</button>
-                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Viernes'">Viernes</button>
-                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Sabado'">Sabado</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Lunes'">L</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Martes'">M</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Miercoles'">Mi</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Jueves'">J</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Viernes'">V</button>
+                    <button type="button" class="btn btn-secondary" (click)="itemPipe='Sabado'">S</button>
                 </div>
                 <div class="tablaScroll" #scrollframe>
                     <div class="list-group list-group-flush" *ngFor="let item of this.turnosMostrar | filtro:itemPipe"
@@ -62,17 +112,17 @@
             </div>
         </div>
 
-    </div>
+    </div>-->
+    <hr>
+    <br>
 
-
-    <div class="card-group">
-        <div class="card">
-            <div class="card-body text-center bg-dark">
-                <h6 class="card-title" style="color: white;">Turno Rapido</h6>
-                <!--Agregar Turno mas cercana de la especialidad seleccionada-->
-                <button *ngIf="this.turnoRapido!=null" type="button"
-                    class="btn btn-success btn-block" (click)="PedirTurnoRapido(this.turnoRapido)">{{this.turnoRapido.dia}} {{this.turnoRapido.hora}}</button>
-            </div>
+    <div class="card">
+        <div class="card-body text-center bg-dark">
+            <h6 class="card-title" style="color: white; text-align: center;">Turno Rapido</h6>
+            <!--Agregar Turno mas cercana de la especialidad seleccionada-->
+            <button *ngIf="this.turnoRapido!=null" type="button" class="btn btn-success btn-block"
+                (click)="PedirTurnoRapido(this.turnoRapido)" appResaltarBoton>{{this.turnoRapido.dia}}
+                {{this.turnoRapido.hora}}</button>
         </div>
     </div>
 
@@ -80,4 +130,4 @@
 
 
 
-</body>
+

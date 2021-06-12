@@ -1,0 +1,38 @@
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+
+                </li>
+            </ul>
+            <div>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" routerLink="/home">Menu</button>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <div class="caja" *ngIf="this.spinner">
+            <div class="caja-screen">
+                <img class="spinner" src="../../../assets/gifCarga.gif">
+            </div>
+        </div>
+    
+        <div *ngIf="!this.spinner">
+            <div style="display: block">
+                <canvas baseChart 
+                [datasets]="barChartData" 
+                [labels]="barChartLabels" 
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins" 
+                [legend]="barChartLegend" 
+                [chartType]="barChartType">
+                </canvas>
+            </div>
+            
+        </div>
+        <div *ngIf="!this.spinner">
+            <!--<button class="btn btn-primary btn-block" (click)="DescargarGraficos()">Descargar Grafico</button>-->
+        </div>
+    </div>
+</body>

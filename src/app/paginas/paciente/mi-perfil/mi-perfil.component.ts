@@ -5,7 +5,7 @@ import { HistoriaClinicaService } from 'src/app/servicios/historia-clinica.servi
 
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 
 
 @Component({
@@ -48,7 +48,7 @@ export class MiPerfilComponent implements OnInit {
       background: 'white',
       scale: 3,
     };
-    doc.text("Historial Clinico",82,10);
+    
 
     html2canvas(DATA, options)
     .then((canvas) => {

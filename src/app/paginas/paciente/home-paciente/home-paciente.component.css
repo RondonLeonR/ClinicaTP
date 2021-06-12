@@ -1,25 +1,7 @@
 
-.underlineHover:after {
-    display: block;
-    left: 0;
-    bottom: -10px;
-    width: 0;
-    height: 2px;
-    background-color: #ea0e0e;
-    content: "";
-    transition: width 0.2s;
-}
-
-.underlineHover:hover {
-    color: #0d0d0d;
-}
-
-.underlineHover:hover:after{
-    width: 100%;
-}
 
 .tablaScroll{
-    height: 300px;
+    height: 250px;
     overflow-y:scroll;
     z-index: 100;
 }
@@ -31,6 +13,6 @@
 }
 
 .tablaScroll::-webkit-scrollbar-thumb{
-    background: #3eff4f;
+    background: #747474f4;
     border-radius: 4px;
 }

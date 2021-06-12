@@ -1,0 +1,10 @@
+<!-- horizontal -->
+
+<div class="flip" *ngFor="let item of listaMostrarEspecialidades" (click)="EspecialidadElegida(item)">
+   <div class="front" style="background-image: url({{item.foto}})">
+      <!--<h6 class="text-shadow" style="text-align: center;"></h6>-->
+   </div>
+   <div class="back">
+      <p style="text-align: center;">{{item.nombre | cortarPalabras:item.nombre}}</p>
+   </div>
+</div>

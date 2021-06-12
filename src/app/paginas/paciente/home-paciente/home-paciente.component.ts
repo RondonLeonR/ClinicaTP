@@ -122,13 +122,13 @@ export class HomePacienteComponent implements OnInit {
     this.profesionalEspecialidad = [];
     this.listadoEsp.forEach(prof => {
       prof.especialidad.forEach(esp => {
-        if (esp.nombre == item) {
+        if (esp.nombre == item.nombre) {
           this.profesionalEspecialidad.push(prof);
         }
       });
     });
 
-    this.especialidadSeleccionada = item;
+    this.especialidadSeleccionada = item.nombre;
 
 
     this.BuscarTurnosDeEspecialidad();

@@ -29,6 +29,17 @@ import { EstadosDirective } from './directivas/estados.directive';
 import { MisTurnosComponent } from './paginas/paciente/mis-turnos/mis-turnos.component';
 import { FiltroPipe } from './pipes/filtro.pipe';
 import { MiPerfilComponent } from './paginas/paciente/mi-perfil/mi-perfil.component';
+import { SeccionUsuariosComponent } from './paginas/especialista/seccion-usuarios/seccion-usuarios.component';
+
+import { ChartsModule } from 'ng2-charts';
+import { BarraTurnosDiasComponent } from './paginas/especialista/barra-turnos-dias/barra-turnos-dias.component';
+import { OperacionesEspecialidadComponent } from './paginas/especialista/operaciones-especialidad/operaciones-especialidad.component';
+import { BotonesSolicitarTurnoComponent } from './componentes/botones-solicitar-turno/botones-solicitar-turno.component';
+import { BotonesMostrarEspecialistasComponent } from './componentes/botones-mostrar-especialistas/botones-mostrar-especialistas.component';
+import { LetraPipe } from './pipes/letra.pipe';
+import { MouseSobreBotonDirective } from './directivas/mouse-sobre-boton.directive';
+import { ResaltarBotonDirective } from './directivas/resaltar-boton.directive';
+import { CortarPalabrasPipe } from './pipes/cortar-palabras.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +61,17 @@ import { MiPerfilComponent } from './paginas/paciente/mi-perfil/mi-perfil.compon
     EstadosDirective,
     MisTurnosComponent,
     FiltroPipe,
-    MiPerfilComponent
+    MiPerfilComponent,
+    SeccionUsuariosComponent,
+    BarraTurnosDiasComponent,
+    OperacionesEspecialidadComponent,
+    BotonesSolicitarTurnoComponent,
+    BotonesMostrarEspecialistasComponent,
+    LetraPipe,
+    MouseSobreBotonDirective,
+    ResaltarBotonDirective,
+    CortarPalabrasPipe
+    
   ],
   imports: [
     BrowserModule,
@@ -60,7 +81,8 @@ import { MiPerfilComponent } from './paginas/paciente/mi-perfil/mi-perfil.compon
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
